@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Reflection;
 using UnityEngine;
 
 namespace RemoteTech
@@ -385,9 +386,6 @@ namespace RemoteTech
         
         private bool GetShieldedStateFromFAR()
         {
-            // TODO_HoneyFox: would like to integrate FAR here.
-            // This is just some pseudo-codes. Not tested/compiled.
-            
             // Check if this part is shielded by fairings/cargobays according to FAR's information...
             PartModule FARPartModule = null;
             if (part.Modules.Contains("FARBasicDragModel"))
@@ -408,7 +406,7 @@ namespace RemoteTech
                 try
                 {
                     FieldInfo fi = FARPartModule.GetType().GetField("isShielded");
-                    return ((fi.GetValue(FARPartModule)) as Boolean);
+                    return (bool)(fi.GetValue(FARPartModule));
                 }
                 catch (Exception e)
                 {
