@@ -423,10 +423,10 @@ namespace RemoteTech
             if (vessel == null) return;
             if (!vessel.HoldPhysics && vessel.atmDensity > 0 && MaxQ > 0 && mDeployFxModules.Any(a => a.GetScalar > 0.9f))
             {
-                if (GetShieldedStateFromFAR() == false)
-                {
-                    if (vessel.srf_velocity.sqrMagnitude * vessel.atmDensity / 2 > MaxQ)
-                    {
+                if (vessel.srf_velocity.sqrMagnitude * vessel.atmDensity / 2 > MaxQ)
+				{
+					if (GetShieldedStateFromFAR() == false)
+					{
                         MaxQ = -1.0f;
                         part.decouple(0.0f);
                     }
